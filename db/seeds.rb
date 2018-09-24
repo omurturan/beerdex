@@ -13,7 +13,7 @@ Beer.delete_all
 User.delete_all
 
 numberOfBeers = 1000
-numberOfUsers = 100
+numberOfUsers = 10
 
 puts "Starting with #{Beer.count} beers."
 for i in 1..numberOfBeers do
@@ -42,3 +42,23 @@ for i in 1..numberOfUsers do
     )
 end
 puts "Now we have #{User.count} users! 🤓"
+
+Beer.all.each do |beer|
+    Like.create(
+        beer: beer,
+        user: User.first
+    )
+end
+
+
+# User.first.likes.each do |like|
+#     p "#{like.beer.name} is liked on #{like.created_at}"
+# end
+
+# User.first.likes.preload(:beer).each do |like|
+#     p "#{like.beer.name} is liked on #{like.created_at}"
+# end
+
+# User.first.likes.includes(:beer).each do |like|
+#     p "#{like.beer.name} is liked on #{like.created_at}"
+# end
